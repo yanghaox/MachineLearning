@@ -64,6 +64,24 @@ def gradient_descent(x,y,beta,alpha,iterations):
         cost_hitory[iteration]  = cost
     return beta, cost_hitory
 newBeta, cost_hitory = gradient_descent(x,y, beta, alpha, 1000000)
-print(newBeta)
-print(cost_hitory[-1])
+#print(newBeta)
+#   [-1.43618696  0.09587865  0.91025832]
+#print(cost_hitory[-1])
+#  10.455661867475534
 
+'''define the medel evaluation by RMSE and R**2
+'''
+def rmse(y, y_prediction):
+    rmse = np.sqrt(sum((y_prediction - y)**2)/len(y))
+    return rmse
+
+def r(y,y_prediction):
+    ssr = np.sum((y - y_prediction)**2)
+    sst = np.sum((y - np.mean(y))**2)
+    r = 1 - ssr/sst
+    return r
+y_prediction = x.dot(newBeta)
+print(rmse(y,y_prediction))
+#4.572890085596973
+print(r(y,y_prediction))
+#0.9098900531097458
