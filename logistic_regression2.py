@@ -82,12 +82,31 @@ print(titanic_drop.head())
 titanic_dmy = pd.concat([titanic_drop, gender, embark_location], axis=1)
 print(titanic_dmy.head())
 
+'''
+Checking for independence between features
+'''
+#sb.heatmap(titanic_dmy.corr())
 
+'''
+Fare and Pclass are not independent of each other, 
+so I am going to drop these.
+'''
 
+titanic_dmy_drop = titanic_dmy.drop(['Fare', 'Pclass'], 1)
+print(titanic_dmy_drop.head())
 
+titanic_dmy.info()
 
+X = titanic_dmy.ix[:,(1,2,3,4,5,6)].values
+y = titanic_dmy.ix[:,0].values
 
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = .3, random_state=25)
 
-
-
-plt.show()
+LogReg = LogisticRegression()
+LogReg.fit(X_train, y_train)
+y_pred = LogReg.predict(X_test)
+from sklearn.metrics import confusion_matrix
+confusion_matrix = confusion_matrix(y_test, y_pred)
+cla = classification_report(y_test, y_pred)
+print(confusion_matrix)
+print(cla)
