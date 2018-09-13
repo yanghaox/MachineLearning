@@ -1,5 +1,3 @@
-from pythonds.basic.stack import Stack
-
 """
 要实现 size 方法，我们需要遍历链表并对节点数计数
 def size(self):

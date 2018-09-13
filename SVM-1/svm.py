@@ -18,3 +18,14 @@ gamma 参数什么意思
  
  C越小，容易欠拟合。C过大或过小，泛化能力变差
 """
+
+# 导入数据集 分类器 和矩阵
+# 抓取原始mnist数据
+from sklearn.datasets import fetch_mldata
+
+# from mnist_helpers import*
+
+mnist = fetch_mldata('MNIST ORIGINAL, ', data_home='$HOME/scikit_learn_data')
+
+images = mnist.data
+targets = mnist.target
